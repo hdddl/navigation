@@ -3,8 +3,8 @@ from jinja2 import Template
 import json
 
 def render_to_file():
-    with open("./data.json", "r") as f:     # read json data
-        data = json.load(f)
+    with open("data.json", "r") as f:     # read json data
+        data = json.loads(f.read())
     
     with open("base.html", "r") as f:       # read template
         template = Template(f.read())
