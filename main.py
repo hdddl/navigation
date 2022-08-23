@@ -16,7 +16,8 @@ def render_to_file():
     )
     with open("./assert/index.html", "w") as index:     # write to file
         index.write(html)
-            
+
+ 
 
 def main():
     render_to_file()
