@@ -36,6 +36,7 @@ def edit_website():
         3. select category 选择分类
         4. list sites 列出当前分类小的所有网站
         5. add site 添加网站到当前分类
+        6. delete site 从当前分类删除网站
     """
 
     while(True):
@@ -79,14 +80,25 @@ def edit_website():
             with open("data.json", "w", encoding="utf-8") as f:      
                 json.dump(data, f, indent=4, ensure_ascii=False)
             render_to_file()
+        elif cmd == "delete site":
+            if category == "":
+                print("select category first")
+                continue
+            print("name >> ", end="")
+            name = input()
+            for i in data["data"]:
+                if i["category"] == category:
+                    for j in i['sites']:
+                        if j['name'] == name:
+                            i['sites'].remove(j)
+            print("delete site success")
+            with open("data.json", "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=4, ensure_ascii=False)
+            render_to_file()
         elif(re.match("select.*", cmd)):
             category = cmd.split(" ")[-1];
         else:
             print("command not found")
-        
-        
- 
-
 
 # 通用命令处理
 def main():
